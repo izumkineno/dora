@@ -1,0 +1,99 @@
+index_version: "1.0"
+format: jsonl
+record_types:
+  - name: file_record
+    required_fields:
+      - record_type
+      - index_version
+      - generated_at
+      - file_path
+      - file_kind
+      - crate
+      - module_path
+      - role
+      - one_line_summary
+      - key_symbols
+      - depends_on_files
+      - depended_by_files
+      - feature_flags
+      - cfg_conditions
+      - unsafe_present
+      - search_keywords
+      - typical_queries
+    field_types:
+      record_type: string
+      index_version: string
+      generated_at: string
+      file_path: string
+      file_kind: string
+      crate: string
+      module_path: string
+      role: string
+      one_line_summary: string
+      key_symbols:
+        type: array
+        items: string
+      depends_on_files:
+        type: array
+        items: string
+      depended_by_files:
+        type: array
+        items: string
+      feature_flags:
+        type: array
+        items: string
+      cfg_conditions:
+        type: array
+        items: string
+      unsafe_present: boolean
+      search_keywords:
+        type: array
+        items: string
+      typical_queries:
+        type: array
+        items: string
+  - name: symbol_record
+    required_fields:
+      - record_type
+      - index_version
+      - generated_at
+      - symbol_name
+      - symbol_kind
+      - defined_in
+      - module_path
+      - visibility
+      - reexported_from
+      - feature_gate
+      - cfg_conditions
+      - related_symbols
+      - used_by_files
+      - summary
+      - typical_queries
+    field_types:
+      record_type: string
+      index_version: string
+      generated_at: string
+      symbol_name: string
+      symbol_kind: string
+      defined_in: string
+      module_path: string
+      visibility: string
+      reexported_from:
+        type: array
+        items: string
+      feature_gate:
+        type: array
+        items: string
+      cfg_conditions:
+        type: array
+        items: string
+      related_symbols:
+        type: array
+        items: string
+      used_by_files:
+        type: array
+        items: string
+      summary: string
+      typical_queries:
+        type: array
+        items: string

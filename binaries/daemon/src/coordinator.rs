@@ -74,9 +74,11 @@ pub async fn register(
         .set_nodelay(true)
         .wrap_err("failed to set TCP_NODELAY")?;
 
+    let zenoh_peer_id = state.zenoh_session.as_ref().map(|s| s.zid().to_string());
+
     // Registration handshake (raw length-prefixed JSON)
     let register = serde_json::to_vec(&Timestamped {
-        inner: CoordinatorRequest::Register(DaemonRegisterRequest::new(machine_id)),
+        inner: CoordinatorRequest::Register(DaemonRegisterRequest::new(machine_id, zenoh_peer_id)),
         timestamp: clock.new_timestamp(),
     })?;
     socket_stream_send(&mut stream, &register)
@@ -171,10 +173,6 @@ impl DaemonControl for DaemonControlServer {
             uv,
         } = request;
 
-        match dataflow_descriptor.communication.remote {
-            dora_core::config::RemoteCommunicationConfig::Tcp => {}
-        }
-
         let base_working_dir =
             crate::Daemon::base_working_dir_static(local_working_dir, session_id)
                 .map_err(|err| format!("{err:?}"))?;
@@ -244,10 +242,6 @@ impl DaemonControl for DaemonControlServer {
             uv,
             write_events_to,
         } = request;
-
-        match dataflow_descriptor.communication.remote {
-            dora_core::config::RemoteCommunicationConfig::Tcp => {}
-        }
 
         // For spawn, we still route through the event loop because spawn_dataflow
         // needs mutable access to the logger and complex event loop integration.

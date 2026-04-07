@@ -233,6 +233,8 @@ nodes:
 
 The full documentation is available on [our website](https://dora-rs.ai/).
 A lot of guides are available on [this section](https://dora-rs.ai/docs/guides/) of our website.
+For a practical tutorial on creating a Dora workflow, see [docs/create-workflow-tutorial.md](docs/create-workflow-tutorial.md).
+For AI-specific workflow authoring rules, see [docs/ai-workflow-writing-rules.md](docs/ai-workflow-writing-rules.md).
 
 ## What is Dora? And what features does Dora offer?
 
